@@ -9,10 +9,6 @@ export interface State {
 }
 
 export default new Vuex.Store({
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
     movies,
   },
