@@ -10,13 +10,10 @@
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-card v-if="!!movies && Array.isArray(movies) && movies.length" class="mb-6 grid-c4">
-              <v-card v-for="(movie, i) in movies" :key="i" class="mx-auto" max-width="344"
-              outlined tile>
-                <v-img :src="movie.poster_path" height="200px"></v-img>
-                <v-card-title>{{movie.title}}</v-card-title>
-                <v-card-text>{{movie.overview}}</v-card-text>
+              <div v-for="(movie, i) in movies" :key="i">
+              <MoviesCart :movie="movie"/>
+              </div>
               </v-card>
-            </v-card>
             <v-card v-else class="mb-6 grid-c4">
             <v-skeleton-loader
             v-for="i in 20" :key="i" class="pa-4" loading type="article">
@@ -32,12 +29,16 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import * as actionTypes from '../store/action-types';
+import * as MutationTypes from '../store/mutation-types';
 import { MovieType } from '../types/MovieType';
 import { GenreType } from '../types/GenreType';
+import MoviesCart from './MoviesCart.vue';
 
 @Component({
   name: 'Genre',
-  components: {},
+  components: {
+    MoviesCart,
+  },
 })
 export default class Genre extends Vue {
   private getGenres() {
