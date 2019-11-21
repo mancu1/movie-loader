@@ -24,13 +24,14 @@ const getters = {
 // actions
 const actions = {
   [ActionTypes.fetchMovies]: (context: ActionContext<State>, search: string) => {
+    context.commit(MutationTypes.CLEAR_MOVIES);
     Axios.get(getRequestUrl('/discover/movie', { with_genres: search }))
       .then((response) => {
         context.commit(MutationTypes.SET_MOVIES, response.data.results);
       })
       .catch((err) => {
         alert(err);
-      })
+      });
   },
   [ActionTypes.fetchMoviesGenre]: (context: ActionContext<State>) => {
     Axios.get(getRequestUrl('/genre/movie/list', null))
@@ -50,6 +51,9 @@ const mutations = {
   },
   [MutationTypes.SET_MOVIES_GENRE]: (state: State, genres: any[]) => {
     state.genres = genres;
+  },
+  [MutationTypes.CLEAR_MOVIES]: (state: State) => {
+    state.movies = [];
   },
 };
 
