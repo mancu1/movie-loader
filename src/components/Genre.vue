@@ -10,7 +10,9 @@
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-card v-if="!!movies && Array.isArray(movies) && movies.length" class="mb-6 grid-c4">
-              <v-card v-for="(movie, i) in movies" :key="i" class="pa-4" outlined tile>
+              <v-card v-for="(movie, i) in movies" :key="i" class="mx-auto" max-width="344"
+              outlined tile>
+                <v-img :src="movie.poster_path" height="200px"></v-img>
                 <v-card-title>{{movie.title}}</v-card-title>
                 <v-card-text>{{movie.overview}}</v-card-text>
               </v-card>

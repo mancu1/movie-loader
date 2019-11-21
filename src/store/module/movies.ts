@@ -2,11 +2,13 @@ import Axios from 'axios';
 import * as ActionTypes from '../action-types';
 import * as MutationTypes from '../mutation-types';
 import { ActionContext } from '../types';
-import { RestApiUrl, getRequestUrl } from '@/environment';
+import { RestApiUrl, getRequestUrl, ImgApiUrl } from '@/environment';
+import { MovieType } from '@/types/MovieType';
+import { GenreType } from '@/types/GenreType';
 
 export interface State {
-  movies: any[]
-  genres: any[]
+  movies: MovieType[]
+  genres: GenreType[]
 }
 
 // initial state
@@ -46,10 +48,14 @@ const actions = {
 
 // mutations
 const mutations = {
-  [MutationTypes.SET_MOVIES]: (state: State, movies: any[]) => {
-    state.movies = movies;
+  [MutationTypes.SET_MOVIES]: (state: State, movies: MovieType[]) => {
+    state.movies = movies.map(movie => ({
+      ...movie,
+      poster_path: `${ImgApiUrl}${movie.poster_path}`,
+      overview: movie.overview.length > 150 ? `${movie.overview.substring(0, 150)}... ` : movie.overview,
+    }));
   },
-  [MutationTypes.SET_MOVIES_GENRE]: (state: State, genres: any[]) => {
+  [MutationTypes.SET_MOVIES_GENRE]: (state: State, genres: GenreType[]) => {
     state.genres = genres;
   },
   [MutationTypes.CLEAR_MOVIES]: (state: State) => {
