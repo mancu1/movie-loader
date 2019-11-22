@@ -5,7 +5,7 @@
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### Project launch
 ```
 yarn serve
 ```
