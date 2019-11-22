@@ -2,25 +2,28 @@ import Axios from 'axios';
 import * as ActionTypes from '../action-types';
 import * as MutationTypes from '../mutation-types';
 import { ActionContext } from '../types';
-import { RestApiUrl, getRequestUrl, ImgApiUrl } from '@/environment';
+import { getRequestUrl, ImgApiUrl } from '@/environment';
 import { MovieType } from '@/types/MovieType';
 import { GenreType } from '@/types/GenreType';
 
 export interface State {
   movies: MovieType[]
   genres: GenreType[]
+  selectedMovie?: MovieType
 }
 
 // initial state
 const initState: State = {
   movies: [],
   genres: [],
+  selectedMovie: undefined,
 };
 
 // getters
 const getters = {
   getMovies: (state: State) => state.movies,
   getGenres: (state: State) => state.genres,
+  getMovie: (state: State) => state.selectedMovie,
 };
 
 // actions
@@ -44,6 +47,22 @@ const actions = {
         alert(err);
       });
   },
+  [ActionTypes.fetchMovie]: (context: ActionContext<State>, movieId: string) => {
+    context.commit(MutationTypes.CLEAR_MOVIE);
+    Axios.get(getRequestUrl(`/movie/${movieId}`, null))
+      .then((response: any) => {
+        Axios.get(getRequestUrl(`/movie/${movieId}/videos`, null))
+          .then((videosRespone) => {
+            context.commit(MutationTypes.SET_MOVIE,
+              { ...response.data, videos: videosRespone.data.results });
+          })
+          .catch((err) => {
+            alert(err);
+          });
+      }).catch((err) => {
+        alert(err);
+      });
+  },
 };
 
 // mutations
@@ -60,6 +79,15 @@ const mutations = {
   },
   [MutationTypes.CLEAR_MOVIES]: (state: State) => {
     state.movies = [];
+  },
+  [MutationTypes.SET_MOVIE]: (state: State, movie: MovieType) => {
+    state.selectedMovie = {
+      ...movie,
+      poster_path: `${ImgApiUrl}${movie.poster_path}`,
+    };
+  },
+  [MutationTypes.CLEAR_MOVIE]: (state: State) => {
+    state.selectedMovie = undefined;
   },
 };
 
