@@ -1,24 +1,48 @@
 <template>
   <v-container>
-    <v-layout text-center wrap>
+    <v-layout
+      text-center
+      wrap
+    >
       <v-flex xs12>
-        <v-btn @click="getGenres()">Press me</v-btn>
+        <v-btn @click="getGenres()">
+          Press me
+        </v-btn>
       </v-flex>
       <v-expansion-panels accordion>
-        <v-expansion-panel v-for="(genre, i) in genres" :key="i">
-          <v-expansion-panel-header @click="getMovies(genre.id)">{{ genre.name }}
+        <v-expansion-panel
+          v-for="(genre, i) in genres"
+          :key="i"
+        >
+          <v-expansion-panel-header
+            @click="getMovies(genre.id)"
+          >
+            {{ genre.name }}
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <v-card v-if="!!movies && Array.isArray(movies) && movies.length" class="mb-6 grid-c4">
-              <div v-for="(movie, i) in movies" :key="i">
-              <MoviesCart :movie="movie"/>
+            <v-container
+              v-if="!!movies && Array.isArray(movies) && movies.length"
+              class="mb-6 grid-c4"
+            >
+              <div
+                v-for="(movie, i) in movies"
+                :key="i"
+              >
+                <MoviesCart :movie="movie" />
               </div>
-              </v-card>
-            <v-card v-else class="mb-6 grid-c4">
-            <v-skeleton-loader
-            v-for="i in 20" :key="i" class="pa-4" loading type="article">
-            </v-skeleton-loader>
-            </v-card>
+            </v-container>
+            <v-container
+              v-else
+              class="mb-6 grid-c4"
+            >
+              <v-skeleton-loader
+                v-for="i in 20"
+                :key="i"
+                class="pa-4"
+                loading
+                type="article"
+              />
+            </v-container>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -63,6 +87,7 @@ export default class Genre extends Vue {
 .grid-c4 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: max-content;
   grid-gap: 20px;
 }
 </style>

@@ -1,12 +1,37 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-    </div>
-    <router-view />
+    <v-app>
+      <v-app-bar @click="goTo('/')"
+        color="white"
+        elevate-on-scroll
+        class="d-flex justify-center"
+      >
+         <v-btn icon>
+        <v-icon >mdi-home</v-icon>
+      </v-btn>
+      <v-toolbar-title>Movie loader</v-toolbar-title>
+      </v-app-bar>
+      <v-content>
+        <v-container>
+          <router-view />
+        </v-container>
+      </v-content>
+    </v-app>
   </div>
 </template>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 
+@Component({
+  name: 'App',
+  components: {},
+})
+export default class App extends Vue {
+  private goTo(path: string) {
+    this.$router.push(path);
+  }
+}
+</script>
 <style lang="scss">
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
