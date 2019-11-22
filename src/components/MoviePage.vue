@@ -1,7 +1,10 @@
 <template>
   <v-container class="d-flex">
     <v-row>
-      <v-img :src="movie.poster_path" max-width="400px" />
+      <v-img
+        :src="movie.poster_path"
+        max-width="400px"
+      />
     </v-row>
     <v-card>
       <v-card-title class="display-1">
@@ -11,13 +14,16 @@
         {{ movie.overview }}
       </v-card-text>
       <v-container class="mx-auto">
-      <iframe width="720px" height="480px"
-        v-if="!!movie.videos && movie.videos.length"
-        :src="'https://www.youtube.com/embed/' + movie.videos[0].key"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe></v-container>
+        <iframe
+          width="720px"
+          height="480px"
+          v-if="!!movie.videos && movie.videos.length"
+          :src="'https://www.youtube.com/embed/' + movie.videos[0].key"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      </v-container>
     </v-card>
   </v-container>
 </template>

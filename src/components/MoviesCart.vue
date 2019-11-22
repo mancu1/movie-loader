@@ -16,8 +16,13 @@
     </v-card-title>
     <v-card-text>{{ movie.overview }}</v-card-text>
     <v-card-actions>
-              <v-btn text @click="openMovie()">Подробнее</v-btn>
-            </v-card-actions>
+      <v-btn
+        text
+        @click="openMovie()"
+      >
+        Подробнее
+      </v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 <script lang="ts">

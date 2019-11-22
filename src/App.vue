@@ -2,15 +2,16 @@
   <div id="app">
     <v-app>
       <!-- header -->
-      <v-app-bar @click="goTo('/')"
+      <v-app-bar
+        @click="goTo('/')"
         color="white"
         elevate-on-scroll
         class="d-flex justify-center"
       >
-         <v-btn icon>
-        <v-icon >mdi-home</v-icon>
-      </v-btn>
-      <v-toolbar-title>Movie loader</v-toolbar-title>
+        <v-btn icon>
+          <v-icon>mdi-home</v-icon>
+        </v-btn>
+        <v-toolbar-title>Movie loader</v-toolbar-title>
       </v-app-bar>
       <!-- main content -->
       <v-content>
