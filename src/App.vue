@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <v-app>
+      <!-- header -->
       <v-app-bar @click="goTo('/')"
         color="white"
         elevate-on-scroll
@@ -11,6 +12,7 @@
       </v-btn>
       <v-toolbar-title>Movie loader</v-toolbar-title>
       </v-app-bar>
+      <!-- main content -->
       <v-content>
         <v-container>
           <router-view />
@@ -27,6 +29,7 @@ import { Component, Vue } from 'vue-property-decorator';
   components: {},
 })
 export default class App extends Vue {
+  // routing
   private goTo(path: string) {
     this.$router.push(path);
   }

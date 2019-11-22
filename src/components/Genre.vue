@@ -4,11 +4,6 @@
       text-center
       wrap
     >
-      <v-flex xs12>
-        <v-btn @click="getGenres()">
-          Press me
-        </v-btn>
-      </v-flex>
       <v-expansion-panels accordion>
         <v-expansion-panel
           v-for="(genre, i) in genres"
@@ -65,18 +60,26 @@ import MoviesCart from './MoviesCart.vue';
   },
 })
 export default class Genre extends Vue {
+  private created() {
+    this.getGenres();
+  }
+
+  // request genres
   private getGenres() {
     this.$store.dispatch(actionTypes.fetchMoviesGenre);
   }
 
+  // request movies by genre id
   private getMovies(id: string) {
     this.$store.dispatch(actionTypes.fetchMovies, id);
   }
 
+  // get genres from request answer
   get genres(): GenreType[] {
     return this.$store.getters.getGenres;
   }
 
+  // get movies from request answer
   get movies(): MovieType[] {
     return this.$store.getters.getMovies;
   }

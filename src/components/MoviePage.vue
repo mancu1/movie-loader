@@ -30,14 +30,17 @@ import * as ActionTypes from '../store/action-types';
   components: {},
 })
 export default class MoviePage extends Vue {
+  // fetch movie by movieId
   private created() {
     this.$store.dispatch(ActionTypes.fetchMovie, this.movieId);
   }
 
+  // get movieId by url
   get movieId() {
     return this.$route.params.movieId;
   }
 
+  // get movie from response answer
   get movie() {
     return this.$store.getters.getMovie;
   }

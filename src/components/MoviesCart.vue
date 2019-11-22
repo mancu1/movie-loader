@@ -4,6 +4,7 @@
     :elevation="5"
     max-width="20vw"
     height="100%"
+    @click="openMovie()"
   >
     <v-img
       :src="movie.poster_path"
