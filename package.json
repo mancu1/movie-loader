@@ -43,11 +43,10 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/strongly-recommended",
       "@vue/airbnb",
       "@vue/typescript"
     ],
-    "rules": {},
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
     }
